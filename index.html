@@ -127,4 +127,99 @@ margin-bottom:15px;
 <div>
 <h4>Gobierno CDMX</h4>
 <p>Ciudad de México</p>
-<p
+<p>911 Emergencias</p>
+<p>0311 Atención Ciudadana</p>
+</div>
+
+<div>
+<h4>Redes Sociales</h4>
+<p>
+<svg class="icon" viewBox="0 0 24 24"><path d="M22 12a10 10 0 1 0-11.5 9.9v-7h-2v-2.9h2V9.7c0-2 1.2-3.1 3-3.1.9 0 1.8.1 1.8.1v2h-1c-1 0-1.3.6-1.3 1.2v1.5h2.3l-.4 2.9h-1.9v7A10 10 0 0 0 22 12z"/></svg>
+Facebook
+</p>
+
+<p>
+<svg class="icon" viewBox="0 0 24 24"><path d="M22 5.8c-.7.3-1.5.5-2.3.6.8-.5 1.4-1.3 1.7-2.2-.8.5-1.7.9-2.6 1.1A4 4 0 0 0 12 8.5c0 .3 0 .6.1.9-3.3-.2-6.2-1.8-8.2-4.2-.3.6-.5 1.3-.5 2 0 1.4.7 2.7 1.8 3.4-.6 0-1.2-.2-1.7-.5v.1c0 2 1.4 3.7 3.3 4.1-.3.1-.7.1-1 .1-.2 0-.5 0-.7-.1.5 1.6 2 2.7 3.7 2.7A8 8 0 0 1 2 19.5a11.3 11.3 0 0 0 6.1 1.8c7.3 0 11.3-6 11.3-11.3v-.5c.8-.5 1.4-1.2 1.9-2z"/></svg>
+X / Twitter
+</p>
+
+<p>
+<svg class="icon" viewBox="0 0 24 24"><path d="M7 2C4 2 2 4 2 7v10c0 3 2 5 5 5h10c3 0 5-2 5-5V7c0-3-2-5-5-5H7zm5 5a5 5 0 1 1 0 10 5 5 0 0 1 0-10z"/></svg>
+Instagram
+</p>
+</div>
+
+<div>
+<h4>Enlaces</h4>
+<p>Transparencia</p>
+<p>Datos Abiertos</p>
+<p>Gobierno Digital</p>
+</div>
+
+<div>
+<h4>Contacto</h4>
+<p>contacto@cdmx.gob.mx</p>
+</div>
+
+</div>
+
+<div class="footer-bottom">
+© 2026 Gobierno de la Ciudad de México
+</div>
+</div>
+
+<script>
+
+// 🔥 100 FOLIOS (3 EJEMPLO + RESTO EDITABLES)
+const registros = [
+
+{folio:"FOLIO1",estatus:"vigente",nombre:"USUARIO 1",marca:"NISSAN",linea:"VERSA",modelo:"2020",serie:"SER1",motor:"MTR1",color:"ROJO",vigencia:"2027"},
+{folio:"FOLIO2",estatus:"vencido",nombre:"USUARIO 2",marca:"CHEVROLET",linea:"AVEO",modelo:"2019",serie:"SER2",motor:"MTR2",color:"AZUL",vigencia:"2026"},
+{folio:"FOLIO3",estatus:"pendiente",nombre:"USUARIO 3",marca:"FORD",linea:"FIGO",modelo:"2021",serie:"SER3",motor:"MTR3",color:"BLANCO",vigencia:"2027"},
+
+// 🔽 EDITA DESDE AQUÍ
+{folio:"FOLIO4",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+{folio:"FOLIO5",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+{folio:"FOLIO6",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""}
+
+// 👉 puedes duplicar hasta llegar a 100
+];
+
+function consultar(){
+let f=document.getElementById('folio').value.trim();
+let r=registros.find(x=>x.folio===f);
+
+if(!r){
+document.getElementById('resultado').innerHTML='<div class="vencido">FOLIO NO ENCONTRADO</div>';
+return;
+}
+
+let clase = r.estatus=="vigente" ? "vigente" :
+            r.estatus=="pendiente" ? "pendiente" : "vencido";
+
+document.getElementById('resultado').innerHTML=`
+<div class="${clase}">${r.estatus.toUpperCase()}</div>
+
+<div class="doc">
+<div class="doc-header">
+<img src="https://upload.wikimedia.org/wikipedia/commons/9/9c/Logo_CDMX.png">
+<span>${r.folio}</span>
+</div>
+
+<div class="doc-title">PERMISO DE CIRCULACIÓN</div>
+
+<p><b>Nombre:</b> ${r.nombre}</p>
+<p><b>Marca:</b> ${r.marca}</p>
+<p><b>Línea:</b> ${r.linea}</p>
+<p><b>Modelo:</b> ${r.modelo}</p>
+<p><b>Serie:</b> ${r.serie}</p>
+<p><b>Motor:</b> ${r.motor}</p>
+<p><b>Color:</b> ${r.color}</p>
+<p><b>Vigencia:</b> ${r.vigencia}</p>
+
+</div>`;
+}
+</script>
+
+</body>
+</html>
