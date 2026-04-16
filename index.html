@@ -1,178 +1,195 @@
-<!DOCTYPE html><html lang="es">
+<!DOCTYPE html>
+<html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Consulta Oficial de Permisos - CDMX</title><style>
-body{margin:0;font-family:Arial;background:#f0f2f5}
+<title>Consulta Oficial de Permisos - CDMX</title>
 
+<style>
+body{margin:0;font-family:Arial;background:#f0f2f5}
 .header{background:#611232;color:white;padding:12px 25px;display:flex;align-items:center}
 .header img{height:55px;margin-right:15px}
-
 .nav{background:#fff;padding:10px 25px;border-bottom:1px solid #ddd}
-
 .banner{background:linear-gradient(90deg,#611232,#8a1538);color:white;padding:40px;text-align:center}
 
-.container{max-width:1000px;margin:30px auto;padding:20px}
+.container{max-width:900px;margin:30px auto;padding:20px}
 .card{background:white;padding:30px;border-radius:12px;box-shadow:0 8px 20px rgba(0,0,0,0.1)}
 
 input,button{width:100%;padding:12px;margin-top:10px;border-radius:6px;border:1px solid #ccc}
 button{background:#611232;color:white;font-weight:bold;cursor:pointer}
 
-.vigente{color:#0a7a0a;font-weight:bold;font-size:22px}
-.vencido{color:#a30000;font-weight:bold;font-size:22px}
-.pendiente{color:#d4a000;font-weight:bold;font-size:22px}
+.valid{color:#0a7a0a;font-size:22px;font-weight:bold}
+.invalid{color:#a30000;font-size:22px;font-weight:bold}
+.pending{color:#b59b00;font-size:22px;font-weight:bold}
 
-.doc{margin-top:20px;background:white;border:2px solid #611232;padding:20px;border-radius:10px}
+.resultado{margin-top:20px;padding:20px;border-left:6px solid #611232;background:#fafafa;border-radius:8px}
 
 .footer{background:#002f2f;color:white;padding:40px}
 .footer-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
-.social img{width:22px;margin-right:8px;vertical-align:middle}
 .footer-bottom{text-align:center;margin-top:20px;border-top:1px solid #555;padding-top:10px}
-</style></head><body><div class="header">
+</style>
+</head>
+
+<body>
+
+<div class="header">
 <img src="https://upload.wikimedia.org/wikipedia/commons/9/9c/Logo_CDMX.png">
 <h2>Gobierno de la Ciudad de México</h2>
-</div><div class="nav">Inicio / Consulta de permisos</div><div class="banner">
-<h1>Consulta de Permisos de Circulación</h1>
-<p>Sistema oficial de validación vehicular</p>
-</div><div class="container">
-<div class="card"><h3>Consulta por folio</h3>
-<input id="folio" placeholder="Ej: FOLIO1">
-<button onclick="consultar()">Consultar</button><div id="resultado"></div></div>
-</div><div class="footer">
-<div class="footer-grid"><div>
-<h4>Gobierno CDMX</h4>
-<p>Ciudad de México</p>
-<p>911 Emergencias</p>
-<p>0311 Atención</p>
-</div><div>
-<h4>Redes</h4>
-<p class="social"><img src="https://cdn-icons-png.flaticon.com/512/124/124010.png">Facebook</p>
-<p class="social"><img src="https://cdn-icons-png.flaticon.com/512/733/733579.png">X</p>
-<p class="social"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png">Instagram</p>
-</div><div>
-<h4>Enlaces</h4>
-<p>Transparencia</p>
-<p>Datos Abiertos</p>
-<p>Gobierno Digital</p>
-</div><div>
-<h4>Contacto</h4>
-<p>contacto@cdmx.gob.mx</p>
-</div></div><div class="footer-bottom">© 2026 Gobierno CDMX</div>
-</div><script>
+</div>
 
+<div class="nav">Inicio / Consulta de permisos</div>
+
+<div class="banner">
+<h1>Consulta de Permisos de Circulación</h1>
+<p>Sistema oficial de validación</p>
+</div>
+
+<div class="container">
+<div class="card">
+
+<h3>Consulta por folio</h3>
+<input id="folio" placeholder="Ej: FOLIO1">
+<button onclick="consultar()">Consultar</button>
+
+<div id="resultado"></div>
+
+</div>
+</div>
+
+<div class="footer">
+<div class="footer-grid">
+<div><h4>Gobierno CDMX</h4><p>Ciudad de México</p></div>
+<div><h4>Redes</h4><p>Facebook</p><p>X</p><p>Instagram</p></div>
+<div><h4>Enlaces</h4><p>Transparencia</p></div>
+<div><h4>Contacto</h4><p>contacto@cdmx.gob.mx</p></div>
+</div>
+<div class="footer-bottom">© 2026 CDMX</div>
+</div>
+
+<script>
+
+// 🔥 100 FOLIOS REALES (EDITABLES)
 const registros = [
 
-{folio:"PV12Z34",estatus:"vigente",nombre:"SALVADOR MORENO DOMINGUEZ",marca:"VOLKSWAGEN",linea:"GOLF",modelo:"1989",serie:"19K0312392",motor:"NX037791",color:"MORADA",vigencia:"AL 16 DE MAYO 2026"},
-{folio:"FOLIO2",estatus:"vencido",nombre:"USUARIO 2",marca:"CHEVROLET",linea:"AVEO",modelo:"2019",serie:"SER2",motor:"MTR2",color:"AZUL",vigencia:"2026"},
-{folio:"FOLIO3",estatus:"pendiente",nombre:"USUARIO 3",marca:"FORD",linea:"FIGO",modelo:"2021",serie:"SER3",motor:"MTR3",color:"BLANCO",vigencia:"2027"},
+{folio:"FOLIO1",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+{folio:"FOLIO2",estatus:"vencido",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+{folio:"FOLIO3",estatus:"pendiente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
 
-// 🔥 97 REGISTROS EDITABLES
-{folio:"FOLIO4",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
-{folio:"FOLIO5",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
-{folio:"FOLIO6",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
-{folio:"FOLIO7",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
-{folio:"FOLIO8",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
-{folio:"FOLIO9",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
-{folio:"FOLIO10",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+{folio:"FOLIO4",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+{folio:"FOLIO5",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+{folio:"FOLIO6",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+{folio:"FOLIO7",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+{folio:"FOLIO8",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+{folio:"FOLIO9",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+{folio:"FOLIO10",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
 
-{folio:"FOLIO11",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
-{folio:"FOLIO12",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
-{folio:"FOLIO13",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
-{folio:"FOLIO14",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
-{folio:"FOLIO15",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
-{folio:"FOLIO16",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
-{folio:"FOLIO17",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
-{folio:"FOLIO18",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
-{folio:"FOLIO19",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
-{folio:"FOLIO20",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+{folio:"FOLIO11",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+{folio:"FOLIO12",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+{folio:"FOLIO13",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+{folio:"FOLIO14",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+{folio:"FOLIO15",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
 
-{folio:"FOLIO21",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
-{folio:"FOLIO22",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
-{folio:"FOLIO23",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
-{folio:"FOLIO24",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
-{folio:"FOLIO25",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
-{folio:"FOLIO26",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
-{folio:"FOLIO27",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
-{folio:"FOLIO28",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
-{folio:"FOLIO29",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
-{folio:"FOLIO30",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+{folio:"FOLIO16",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+{folio:"FOLIO17",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+{folio:"FOLIO18",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+{folio:"FOLIO19",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+{folio:"FOLIO20",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
 
-{folio:"FOLIO31",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
-{folio:"FOLIO32",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
-{folio:"FOLIO33",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
-{folio:"FOLIO34",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
-{folio:"FOLIO35",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
-{folio:"FOLIO36",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
-{folio:"FOLIO37",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
-{folio:"FOLIO38",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
-{folio:"FOLIO39",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
-{folio:"FOLIO40",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+{folio:"FOLIO21",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+{folio:"FOLIO22",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+{folio:"FOLIO23",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+{folio:"FOLIO24",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+{folio:"FOLIO25",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
 
-{folio:"FOLIO41",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
-{folio:"FOLIO42",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
-{folio:"FOLIO43",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
-{folio:"FOLIO44",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
-{folio:"FOLIO45",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
-{folio:"FOLIO46",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
-{folio:"FOLIO47",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
-{folio:"FOLIO48",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
-{folio:"FOLIO49",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
-{folio:"FOLIO50",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+{folio:"FOLIO26",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+{folio:"FOLIO27",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+{folio:"FOLIO28",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+{folio:"FOLIO29",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+{folio:"FOLIO30",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
 
-{folio:"FOLIO51",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
-{folio:"FOLIO52",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
-{folio:"FOLIO53",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
-{folio:"FOLIO54",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
-{folio:"FOLIO55",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
-{folio:"FOLIO56",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
-{folio:"FOLIO57",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
-{folio:"FOLIO58",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
-{folio:"FOLIO59",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
-{folio:"FOLIO60",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+{folio:"FOLIO31",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+{folio:"FOLIO32",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+{folio:"FOLIO33",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+{folio:"FOLIO34",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+{folio:"FOLIO35",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
 
-{folio:"FOLIO61",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
-{folio:"FOLIO62",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
-{folio:"FOLIO63",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
-{folio:"FOLIO64",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
-{folio:"FOLIO65",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
-{folio:"FOLIO66",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
-{folio:"FOLIO67",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
-{folio:"FOLIO68",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
-{folio:"FOLIO69",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
-{folio:"FOLIO70",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+{folio:"FOLIO36",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+{folio:"FOLIO37",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+{folio:"FOLIO38",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+{folio:"FOLIO39",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+{folio:"FOLIO40",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
 
-{folio:"FOLIO71",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
-{folio:"FOLIO72",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
-{folio:"FOLIO73",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
-{folio:"FOLIO74",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
-{folio:"FOLIO75",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
-{folio:"FOLIO76",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
-{folio:"FOLIO77",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
-{folio:"FOLIO78",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
-{folio:"FOLIO79",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
-{folio:"FOLIO80",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+{folio:"FOLIO41",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+{folio:"FOLIO42",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+{folio:"FOLIO43",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+{folio:"FOLIO44",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+{folio:"FOLIO45",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
 
-{folio:"FOLIO81",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
-{folio:"FOLIO82",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
-{folio:"FOLIO83",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
-{folio:"FOLIO84",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
-{folio:"FOLIO85",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
-{folio:"FOLIO86",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
-{folio:"FOLIO87",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
-{folio:"FOLIO88",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
-{folio:"FOLIO89",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
-{folio:"FOLIO90",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+{folio:"FOLIO46",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+{folio:"FOLIO47",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+{folio:"FOLIO48",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+{folio:"FOLIO49",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+{folio:"FOLIO50",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
 
-{folio:"FOLIO91",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
-{folio:"FOLIO92",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
-{folio:"FOLIO93",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
-{folio:"FOLIO94",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
-{folio:"FOLIO95",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
-{folio:"FOLIO96",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
-{folio:"FOLIO97",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
-{folio:"FOLIO98",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
-{folio:"FOLIO99",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
-{folio:"FOLIO100",estatus:"",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""}
+{folio:"FOLIO51",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+{folio:"FOLIO52",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+{folio:"FOLIO53",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+{folio:"FOLIO54",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+{folio:"FOLIO55",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+
+{folio:"FOLIO56",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+{folio:"FOLIO57",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+{folio:"FOLIO58",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+{folio:"FOLIO59",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+{folio:"FOLIO60",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+
+{folio:"FOLIO61",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+{folio:"FOLIO62",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+{folio:"FOLIO63",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+{folio:"FOLIO64",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+{folio:"FOLIO65",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+
+{folio:"FOLIO66",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+{folio:"FOLIO67",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+{folio:"FOLIO68",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+{folio:"FOLIO69",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+{folio:"FOLIO70",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+
+{folio:"FOLIO71",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+{folio:"FOLIO72",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+{folio:"FOLIO73",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+{folio:"FOLIO74",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+{folio:"FOLIO75",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+
+{folio:"FOLIO76",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+{folio:"FOLIO77",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+{folio:"FOLIO78",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+{folio:"FOLIO79",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+{folio:"FOLIO80",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+
+{folio:"FOLIO81",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+{folio:"FOLIO82",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+{folio:"FOLIO83",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+{folio:"FOLIO84",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+{folio:"FOLIO85",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+
+{folio:"FOLIO86",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+{folio:"FOLIO87",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+{folio:"FOLIO88",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+{folio:"FOLIO89",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+{folio:"FOLIO90",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+
+{folio:"FOLIO91",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+{folio:"FOLIO92",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+{folio:"FOLIO93",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+{folio:"FOLIO94",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+{folio:"FOLIO95",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+
+{folio:"FOLIO96",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+{folio:"FOLIO97",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+{folio:"FOLIO98",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+{folio:"FOLIO99",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""},
+{folio:"FOLIO100",estatus:"vigente",nombre:"",marca:"",linea:"",modelo:"",serie:"",motor:"",color:"",vigencia:""}
 
 ];
 
@@ -181,28 +198,28 @@ let f=document.getElementById('folio').value.trim();
 let r=registros.find(x=>x.folio===f);
 
 if(!r){
-document.getElementById('resultado').innerHTML='<div class="vencido">FOLIO NO ENCONTRADO</div>';
+document.getElementById('resultado').innerHTML='<div class="invalid">FOLIO NO ENCONTRADO</div>';
 return;
 }
 
-let clase = r.estatus=="vigente" ? "vigente" :
-            r.estatus=="pendiente" ? "pendiente" : "vencido";
+let clase = r.estatus==="vigente"?"valid":r.estatus==="vencido"?"invalid":"pending";
 
 document.getElementById('resultado').innerHTML=`
-<div class="${clase}">${r.estatus.toUpperCase()}</div>
-
-<div class="doc">
-<p><b>Folio:</b> ${r.folio}</p>
-<p><b>Nombre:</b> ${r.nombre}</p>
-<p><b>Marca:</b> ${r.marca}</p>
-<p><b>Línea:</b> ${r.linea}</p>
-<p><b>Modelo:</b> ${r.modelo}</p>
-<p><b>Serie:</b> ${r.serie}</p>
-<p><b>Motor:</b> ${r.motor}</p>
-<p><b>Color:</b> ${r.color}</p>
-<p><b>Vigencia:</b> ${r.vigencia}</p>
+<div class="${clase}">ESTATUS: ${r.estatus.toUpperCase()}</div>
+<div class="resultado">
+<b>Folio:</b> ${r.folio}<br>
+<b>Nombre:</b> ${r.nombre}<br>
+<b>Marca:</b> ${r.marca}<br>
+<b>Línea:</b> ${r.linea}<br>
+<b>Modelo:</b> ${r.modelo}<br>
+<b>Serie:</b> ${r.serie}<br>
+<b>Motor:</b> ${r.motor}<br>
+<b>Color:</b> ${r.color}<br>
+<b>Vigencia:</b> ${r.vigencia}
 </div>`;
 }
 
-</script></body>
+</script>
+
+</body>
 </html>
